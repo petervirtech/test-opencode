@@ -1,0 +1,12 @@
+<html>
+<head><title>Add Feature</title></head>
+<body>
+<h1>Add Feature to Epic {{ epic_id }}</h1>
+<form method="post">
+  Title: <input type="text" name="title"><br>
+  Description:<br><textarea name="description"></textarea><br>
+  <input type="submit" value="Add">
+</form>
+<a href="{{ url_for('epic_detail', epic_id=epic_id) }}">Back to Epic</a>
+</body>
+</html>
