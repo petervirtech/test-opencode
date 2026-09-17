@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}PM Buddy{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='cbs.css') }}">
+    <style>
+        @font-face {
+            font-family: "Akko W01 Regular";
+            font-display: swap;
+            src: url("https://cdn.cbs.nl/cdn/fonts/akko-regular.woff2") format("woff2");
+        }
+
+        @font-face {
+            font-family: "Soho W01 Medium";
+            font-display: swap;
+            src: url("https://cdn.cbs.nl/cdn/fonts/soho-medium.woff2") format("woff2");
+        }
+    </style>
 </head>
 <body>
     <header class="menu-bar">

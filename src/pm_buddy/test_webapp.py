@@ -80,10 +80,8 @@ class TestPMBuddyWeb(unittest.TestCase):
 
     def test_index_shows_menu_bar_with_logo_and_nav(self):
         response = self.client.get('/')
-        self.assertEqual(response.status_code, 200)
+        self.assert_layout(response)
         data = response.data
-        self.assertIn(b'<header class="menu-bar">', data)
-        self.assertIn(b'/static/cbs-logo.svg', data)
         self.assertIn(b'Epics', data)
         self.assertIn(b'Sync', data)
 
@@ -149,32 +147,28 @@ class TestPMBuddyWeb(unittest.TestCase):
         response = self.client.get(f'/feature/{fid}')
         self.assertIn(b'<a class="btn" href="/add_story/' + str(fid).encode() + b'">Add Story</a>', response.data)
 
-    def test_add_epic_page_styles_form_fields(self):
-        response = self.client.get('/add_epic')
+    def assert_form_fields(self, response):
         data = response.data
         self.assertIn(b'class="form-control"', data)
         self.assertIn(b'<button type="submit" class="btn">', data)
 
+    def test_add_epic_page_styles_form_fields(self):
+        self.assert_form_fields(self.client.get('/add_epic'))
+
     def test_add_feature_page_styles_form_fields(self):
         eid = w.service.add_epic("Epic")
-        response = self.client.get(f'/add_feature/{eid}')
-        data = response.data
-        self.assertIn(b'class="form-control"', data)
-        self.assertIn(b'<button type="submit" class="btn">', data)
+        self.assert_form_fields(self.client.get(f'/add_feature/{eid}'))
 
     def test_add_story_page_styles_form_fields(self):
         eid = w.service.add_epic("Epic")
         fid = w.service.add_feature(eid, "Feature")
-        response = self.client.get(f'/add_story/{fid}')
-        data = response.data
-        self.assertIn(b'class="form-control"', data)
-        self.assertIn(b'<button type="submit" class="btn">', data)
+        self.assert_form_fields(self.client.get(f'/add_story/{fid}'))
 
     def _set_status(self, table: str, item_id: int, status: str):
         # No API exists to change Status (display-only), so seed the value directly.
         conn = sqlite3.connect(self.db.path)
         try:
-            conn.execute(f"UPDATE {table} SET status = ?", (status,))
+            conn.execute(f"UPDATE {table} SET status = ? WHERE id = ?", (status, item_id))
             conn.commit()
         finally:
             conn.close()

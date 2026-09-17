@@ -4,7 +4,7 @@ SQLite persistence for PM Buddy.
 
 import sqlite3
 from pathlib import Path
-from typing import List
+from typing import List, cast
 
 from .models import Epic, Feature, Story, Status
 
@@ -54,8 +54,7 @@ class DB:
         cur.execute("INSERT INTO epics (title, description, status) VALUES (?, ?, ?)",
                     (epic.title, epic.description, epic.status.value))
         self.conn.commit()
-        assert cur.lastrowid is not None
-        return cur.lastrowid
+        return cast(int, cur.lastrowid)
 
     def list_epics(self) -> List[Epic]:
         cur = self.conn.cursor()
@@ -69,8 +68,7 @@ class DB:
         cur.execute("INSERT INTO features (epic_id, title, description, status) VALUES (?, ?, ?, ?)",
                     (epic_id, feature.title, feature.description, feature.status.value))
         self.conn.commit()
-        assert cur.lastrowid is not None
-        return cur.lastrowid
+        return cast(int, cur.lastrowid)
 
     def list_features(self, epic_id: int) -> List[Feature]:
         cur = self.conn.cursor()
@@ -84,8 +82,7 @@ class DB:
         cur.execute("INSERT INTO stories (feature_id, title, description, status) VALUES (?, ?, ?, ?)",
                     (feature_id, story.title, story.description, story.status.value))
         self.conn.commit()
-        assert cur.lastrowid is not None
-        return cur.lastrowid
+        return cast(int, cur.lastrowid)
 
     def list_stories(self, feature_id: int) -> List[Story]:
         cur = self.conn.cursor()

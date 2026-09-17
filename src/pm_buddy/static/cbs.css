@@ -10,7 +10,7 @@
     --cbs-white: #ffffff;
 
     --font-family-text: 'Akko W01 Regular', Helvetica, Arial, sans-serif;
-    --font-family-titles: 'Soho W01 Medium', sans-serif;
+    --font-family-titles: 'Soho W01 Medium', Helvetica, Arial, sans-serif;
 
     --spacing-smaller: 0.25rem;
     --spacing-small: 0.5rem;
@@ -22,18 +22,6 @@
 
     --cbs-border-radius: 0.25rem;
     --cbs-control-height: 3rem;
-}
-
-@font-face {
-    font-family: "Akko W01 Regular";
-    font-display: swap;
-    src: url("https://cdn.cbs.nl/cdn/fonts/akko-regular.woff2") format("woff2");
-}
-
-@font-face {
-    font-family: "Soho W01 Medium";
-    font-display: swap;
-    src: url("https://cdn.cbs.nl/cdn/fonts/soho-medium.woff2") format("woff2");
 }
 
 body {
@@ -63,6 +51,9 @@ h3 {
 .logo img {
     display: block;
     height: 2rem;
+    font-family: var(--font-family-titles);
+    font-size: 1.5rem;
+    color: var(--cbs-brand-color);
 }
 
 .menu-bar-links {
