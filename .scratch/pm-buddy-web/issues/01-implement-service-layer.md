@@ -4,6 +4,10 @@
 
 **Blocked by:** None (can start immediately)
 
-**Status:** ready-for-agent
-- [ ] Service layer correctly delegates to `DB`.
-- [ ] All CRUD methods return expected IDs and lists.
+**Status:** done
+- [x] Service layer correctly delegates to `DB`.
+- [x] All CRUD methods return expected IDs and lists.
+
+## Comments
+
+- 2026-09-16: Implemented. Verified by `src/pm_buddy/test_service.py` (4 tests, temp-file DB): CRUD delegates to `DB`, IDs and lists correct.

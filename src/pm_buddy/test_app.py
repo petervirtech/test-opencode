@@ -1,7 +1,9 @@
-import unittest
 import sys
-sys.path.append('src')
+import unittest
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 from pm_buddy.app import DB, Epic
 
 class TestPMBuddyDB(unittest.TestCase):

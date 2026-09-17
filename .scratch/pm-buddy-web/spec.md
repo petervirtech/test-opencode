@@ -44,7 +44,7 @@ This satisfies the user’s need for a convenient, Windows‑only web interface 
   * `pm_buddy.webapp` – route handling, rendering.  
   * `pm_buddy.service` – CRUD operations via fresh DB connections.
 - **Prior Art**: Existing `pm_buddy/test_app.py` tests database CRUD; new web tests mirror that pattern but use Flask’s test client.
-- **Isolation**: Tests use an in‑memory SQLite database (`Path(":memory:")`) to avoid side effects.
+- **Isolation**: Tests use a temp‑file SQLite database to avoid side effects. (A plain `:memory:` DB cannot be used because the service opens a new connection per operation and each `:memory:` connection is private.)
 
 ## Out of Scope
 - Full validation and error pages for malformed input.
@@ -54,5 +54,5 @@ This satisfies the user’s need for a convenient, Windows‑only web interface 
 - Styling or JavaScript enhancements.
 
 ## Further Notes
-- The minimal Flask stub used in unit tests is deliberately lightweight; it does not support `app.run()`. The real Flask package must be installed for manual execution.
+- The real Flask package is required for both unit tests and manual execution. (An earlier local `src/flask` stub was removed: it was syntactically broken and could never be imported.)
 - Future iterations may add a `sync` route to push changes to Azure DevOps, but that is outside the current scope.

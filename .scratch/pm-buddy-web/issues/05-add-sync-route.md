@@ -4,7 +4,11 @@
 
 **Blocked by:** 02 (Flask app exists)
 
-**Status:** ready-for-agent
-- [ ] `/sync` route defined.
-- [ ] Calls stub `AzureAdapter.sync_to_azure()`.
-- [ ] Redirects to home page after execution.
+**Status:** done
+- [x] `/sync` route defined.
+- [x] Calls stub `AzureAdapter.sync_to_azure()`.
+- [x] Redirects to home page after execution.
+
+## Comments
+
+- 2026-09-16: Implemented. Fixed a latent bug: the route referenced a non-existent `service.db`; it now builds `DB(db_path=service.db_path)`. Verified by `test_sync_redirects_to_index`.

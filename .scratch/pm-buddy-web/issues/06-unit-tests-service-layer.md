@@ -4,8 +4,12 @@
 
 **Blocked by:** 01 (service layer must exist)
 
-**Status:** ready-for-agent
-- [ ] Test adding an epic and retrieving it.
-- [ ] Test adding a feature under the created epic and listing features.
-- [ ] Test adding a story under the created feature and listing stories.
-- [ ] Verify that IDs are correctly assigned and persisted.
+**Status:** done
+- [x] Test adding an epic and retrieving it.
+- [x] Test adding a feature under the created epic and listing features.
+- [x] Test adding a story under the created feature and listing stories.
+- [x] Verify that IDs are correctly assigned and persisted.
+
+## Comments
+
+- 2026-09-16: Implemented as `src/pm_buddy/test_service.py` (4 tests). Uses a temp-file DB rather than `:memory:` because the service opens a new connection per operation and each `:memory:` connection is private; the temp file gives the same isolation without side effects.

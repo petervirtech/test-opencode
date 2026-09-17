@@ -1,0 +1,16 @@
+<html>
+<head><title>Epic {{ epic.title if epic else 'Not Found' }}</title></head>
+<body>
+{% if epic %}
+<h1>{{ epic.title }}</h1>
+<p>Status: {{ epic.status.value }}</p>
+<p>{{ epic.description }}</p>
+<h2>Features</h2>
+<ul>{% for feature in features %}<li><a href="{{ url_for('feature_detail', feature_id=feature.id) }}">{{ feature.id }}: {{ feature.title }}</a></li>{% endfor %}</ul>
+<a href="{{ url_for('add_feature', epic_id=epic.id) }}">Add Feature</a>
+{% else %}
+<p>Epic not found.</p>
+{% endif %}
+<a href="/">Back to list</a>
+</body>
+</html>

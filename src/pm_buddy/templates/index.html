@@ -2,7 +2,7 @@
 <head><title>PM Buddy</title></head>
 <body>
 <h1>Epics</h1>
-<ul>{% for epic in epics %}<li>{{ epic.id }}: {{ epic.title }}</li>{% endfor %}</ul>
+<ul>{% for epic in epics %}<li><a href="{{ url_for('epic_detail', epic_id=epic.id) }}">{{ epic.id }}: {{ epic.title }}</a></li>{% endfor %}</ul>
 <a href="{{ url_for('add_epic') }}">Add Epic</a>
 </body>
 </html>

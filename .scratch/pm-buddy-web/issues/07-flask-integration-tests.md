@@ -4,10 +4,14 @@
 
 **Blocked by:** 04 & 03 (templates + routes ready)
 
-**Status:** ready-for-agent
-- [ ] GET `/` returns 200 and lists existing epics.
-- [ ] POST to `/add_epic` creates an epic, redirects to home, and the new epic appears.
-- [ ] GET `/epic/<id>` shows features for that epic.
-- [ ] POST to `/add_feature/<epic_id>` creates a feature and redirects appropriately.
-- [ ] GET `/feature/<id>` shows stories for that feature.
-- [ ] POST to `/add_story/<fid>` creates a story and redirects appropriately.
+**Status:** done
+- [x] GET `/` returns 200 and lists existing epics.
+- [x] POST to `/add_epic` creates an epic, redirects to home, and the new epic appears.
+- [x] GET `/epic/<id>` shows features for that epic.
+- [x] POST to `/add_feature/<epic_id>` creates a feature and redirects appropriately.
+- [x] GET `/feature/<id>` shows stories for that feature.
+- [x] POST to `/add_story/<fid>` creates a story and redirects appropriately.
+
+## Comments
+
+- 2026-09-16: Implemented in `src/pm_buddy/test_webapp.py` (8 tests via the Flask test client, temp-file DB). Also covers the `/sync` redirect.

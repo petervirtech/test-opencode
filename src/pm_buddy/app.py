@@ -5,7 +5,7 @@ Provides a console UI to manage Epics, Features and User Stories in an SQLite da
 The data model is mid‑level: Epic -> Feature -> Story. Each entity has a title, description and status.
 
 A hybrid Azure DevOps adapter is included but only contains stubs – it can be extended to sync with TFS.
-""
+"""
 
 import sqlite3
 from pathlib import Path
@@ -29,6 +29,7 @@ class Status(Enum):
 @dataclass
 class Story:
     id: Optional[int] = None
+    feature_id: Optional[int] = None
     title: str = ""
     description: str = ""
     status: Status = Status.TODO
@@ -36,6 +37,7 @@ class Story:
 @dataclass
 class Feature:
     id: Optional[int] = None
+    epic_id: Optional[int] = None
     title: str = ""
     description: str = ""
     status: Status = Status.TODO

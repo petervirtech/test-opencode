@@ -1,0 +1,12 @@
+<html>
+<head><title>Add Story</title></head>
+<body>
+<h1>Add Story to Feature {{ feature_id }}</h1>
+<form method="post">
+  Title: <input type="text" name="title"><br>
+  Description:<br><textarea name="description"></textarea><br>
+  <input type="submit" value="Add">
+</form>
+<a href="{{ url_for('feature_detail', feature_id=feature_id) }}">Back to Feature</a>
+</body>
+</html>

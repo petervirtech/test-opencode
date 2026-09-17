@@ -4,16 +4,6 @@ Minimal Flask web UI for PM Buddy.
 Uses Jinja2 templates located in ``templates`` directory relative to this file.
 """
 
-import sys
-# Ensure the real Flask from site‑packages is used
-import sys, os
-# Move any site‑packages entry to the front of sys.path so it shadows local stubs
-for i, p in enumerate(sys.path):
-    if 'site-packages' in p:
-        sys.path.pop(i)
-        sys.path.insert(0, p)
-# Also remove any local flask package that might shadow the real one
-sys.path = [p for p in sys.path if not (p.endswith('src/flask') or 'src/flask' in p)]
 from flask import Flask, render_template, request, redirect, url_for
 from pathlib import Path
 
@@ -82,7 +72,7 @@ def add_story(feature_id):
 def sync():
     # Stub: call adapter sync_to_azure
     from .app import AzureAdapter
-    AzureAdapter(service.db).sync_to_azure()
+    AzureAdapter(service.open_db()).sync_to_azure()
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
