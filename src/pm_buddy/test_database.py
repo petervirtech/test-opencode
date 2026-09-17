@@ -4,7 +4,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from pm_buddy.app import DB, Epic
+from pm_buddy.database import DB
+from pm_buddy.models import Epic
 
 class TestPMBuddyDB(unittest.TestCase):
     def setUp(self):

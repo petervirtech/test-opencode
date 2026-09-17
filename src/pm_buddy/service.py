@@ -7,7 +7,8 @@ Provides a thin abstraction over the DB class so that web routes can be decouple
 from pathlib import Path
 from typing import List, Optional
 
-from .app import DB, Epic, Feature, Story, Status
+from .database import DB
+from .models import Epic, Feature, Story, Status
 
 class PMBuddyService:
     """

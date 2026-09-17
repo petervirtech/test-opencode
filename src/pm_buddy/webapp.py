@@ -18,7 +18,7 @@ service = PMBuddyService()
 @app.route('/')
 def index():
     epics = service.list_epics()
-    return render_template('index.html', epics=epics)
+    return render_template('index.html', epics=epics, active='epics')
 
 @app.route('/add_epic', methods=['GET','POST'])
 def add_epic():
@@ -27,14 +27,14 @@ def add_epic():
         desc = request.form.get('description','')
         service.add_epic(title,desc)
         return redirect(url_for('index'))
-    return render_template('add_epic.html')
+    return render_template('add_epic.html', active='epics')
 
 @app.route('/epic/<int:epic_id>')
 def epic_detail(epic_id):
     epics = service.list_epics()
     epic = next((e for e in epics if e.id==epic_id), None)
     features = service.list_features(epic_id) if epic else []
-    return render_template('epic_detail.html', epic=epic, features=features)
+    return render_template('epic_detail.html', epic=epic, features=features, active='epics')
 
 @app.route('/add_feature/<int:epic_id>', methods=['GET','POST'])
 def add_feature(epic_id):
@@ -43,7 +43,7 @@ def add_feature(epic_id):
         desc = request.form.get('description','')
         service.add_feature(epic_id,title,desc)
         return redirect(url_for('epic_detail', epic_id=epic_id))
-    return render_template('add_feature.html', epic_id=epic_id)
+    return render_template('add_feature.html', epic_id=epic_id, active='epics')
 
 @app.route('/feature/<int:feature_id>')
 def feature_detail(feature_id):
@@ -57,7 +57,7 @@ def feature_detail(feature_id):
             epic_parent=e
             break
     stories=service.list_stories(feature_id) if feature else []
-    return render_template('feature_detail.html', epic=epic_parent, feature=feature, stories=stories)
+    return render_template('feature_detail.html', epic=epic_parent, feature=feature, stories=stories, active='epics')
 
 @app.route('/add_story/<int:feature_id>', methods=['GET','POST'])
 def add_story(feature_id):
@@ -66,12 +66,12 @@ def add_story(feature_id):
         desc=request.form.get('description','')
         service.add_story(feature_id,title,desc)
         return redirect(url_for('feature_detail', feature_id=feature_id))
-    return render_template('add_story.html', feature_id=feature_id)
+    return render_template('add_story.html', feature_id=feature_id, active='epics')
 
 @app.route('/sync')
 def sync():
     # Stub: call adapter sync_to_azure
-    from .app import AzureAdapter
+    from .adapter import AzureAdapter
     AzureAdapter(service.open_db()).sync_to_azure()
     return redirect(url_for('index'))
 

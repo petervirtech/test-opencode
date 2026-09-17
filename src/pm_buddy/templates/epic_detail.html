@@ -1,16 +1,24 @@
-<html>
-<head><title>Epic {{ epic.title if epic else 'Not Found' }}</title></head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}{{ epic.title if epic else 'Epic not found' }} &mdash; PM Buddy{% endblock %}
+
+{% block content %}
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="{{ url_for('index') }}">Epics</a>
+    {% if epic %} &rsaquo; {{ epic.title }}{% endif %}
+</nav>
 {% if epic %}
 <h1>{{ epic.title }}</h1>
-<p>Status: {{ epic.status.value }}</p>
+<p><span class="badge badge-{{ epic.status.value | lower | replace(' ', '-') }}">{{ epic.status.value }}</span></p>
 <p>{{ epic.description }}</p>
 <h2>Features</h2>
-<ul>{% for feature in features %}<li><a href="{{ url_for('feature_detail', feature_id=feature.id) }}">{{ feature.id }}: {{ feature.title }}</a></li>{% endfor %}</ul>
-<a href="{{ url_for('add_feature', epic_id=epic.id) }}">Add Feature</a>
+<ul>
+    {% for feature in features %}
+    <li><a href="{{ url_for('feature_detail', feature_id=feature.id) }}">{{ feature.id }}: {{ feature.title }}</a></li>
+    {% endfor %}
+</ul>
+<a class="btn" href="{{ url_for('add_feature', epic_id=epic.id) }}">Add Feature</a>
 {% else %}
 <p>Epic not found.</p>
 {% endif %}
-<a href="/">Back to list</a>
-</body>
-</html>
+{% endblock %}

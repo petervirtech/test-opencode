@@ -1,0 +1,168 @@
+:root {
+    --cbs-brand-color: #271d6c;
+    --cbs-blue: #0058b8;
+    --cbs-light-aqua: #00a1cd;
+    --cbs-web-text: #091d23;
+    --cbs-dark-gray: #878787;
+    --cbs-gray: #bdbcbc;
+    --cbs-light-gray: #e9e9e9;
+    --cbs-dark-green: #488225;
+    --cbs-white: #ffffff;
+
+    --font-family-text: 'Akko W01 Regular', Helvetica, Arial, sans-serif;
+    --font-family-titles: 'Soho W01 Medium', sans-serif;
+
+    --spacing-smaller: 0.25rem;
+    --spacing-small: 0.5rem;
+    --spacing-medium-small: 0.75rem;
+    --spacing-regular: 1rem;
+    --spacing-medium-large: 1.25rem;
+    --spacing-large: 1.5rem;
+    --spacing-larger: 3rem;
+
+    --cbs-border-radius: 0.25rem;
+    --cbs-control-height: 3rem;
+}
+
+@font-face {
+    font-family: "Akko W01 Regular";
+    font-display: swap;
+    src: url("https://cdn.cbs.nl/cdn/fonts/akko-regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Soho W01 Medium";
+    font-display: swap;
+    src: url("https://cdn.cbs.nl/cdn/fonts/soho-medium.woff2") format("woff2");
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-family-text);
+    color: var(--cbs-web-text);
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-family-titles);
+}
+
+.menu-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-small) var(--spacing-regular);
+    background: var(--cbs-white);
+    color: var(--cbs-web-text);
+    padding: var(--spacing-small) var(--spacing-regular);
+    border-bottom: 1px solid var(--cbs-light-gray);
+}
+
+.logo img {
+    display: block;
+    height: 2rem;
+}
+
+.menu-bar-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-regular);
+}
+
+.menu-bar-links a {
+    color: var(--cbs-web-text);
+    text-decoration: none;
+    padding: var(--spacing-smaller) 0;
+}
+
+.menu-bar-links a.active {
+    color: var(--cbs-brand-color);
+    text-decoration: underline;
+}
+
+.content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: var(--spacing-regular);
+}
+
+.site-footer {
+    background: var(--cbs-light-gray);
+    color: var(--cbs-dark-gray);
+    text-align: center;
+    padding: var(--spacing-regular);
+    margin-top: var(--spacing-larger);
+}
+
+.btn {
+    display: inline-block;
+    background: var(--cbs-brand-color);
+    color: var(--cbs-white);
+    border: none;
+    border-radius: var(--cbs-border-radius);
+    height: var(--cbs-control-height);
+    padding: 0 var(--spacing-medium-large);
+    font-family: var(--font-family-text);
+    font-size: 1rem;
+    line-height: var(--cbs-control-height);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form-control {
+    height: var(--cbs-control-height);
+    border: 1px solid var(--cbs-gray);
+    border-radius: var(--cbs-border-radius);
+    padding: 0 var(--spacing-small);
+    font-family: var(--font-family-text);
+    font-size: 1rem;
+    color: var(--cbs-web-text);
+}
+
+textarea.form-control {
+    height: auto;
+    min-height: calc(var(--cbs-control-height) * 2);
+    padding: var(--spacing-small);
+}
+
+label {
+    display: block;
+    margin-bottom: var(--spacing-regular);
+}
+
+.breadcrumbs {
+    margin-bottom: var(--spacing-regular);
+    font-size: 0.875rem;
+    color: var(--cbs-dark-gray);
+}
+
+.breadcrumbs a {
+    color: var(--cbs-blue);
+    text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+.badge {
+    display: inline-block;
+    padding: var(--spacing-smaller) var(--spacing-small);
+    border-radius: var(--cbs-border-radius);
+    font-size: 0.875rem;
+    color: var(--cbs-white);
+}
+
+.badge-to-do {
+    background: var(--cbs-dark-gray);
+}
+
+.badge-in-progress {
+    background: var(--cbs-blue);
+}
+
+.badge-done {
+    background: var(--cbs-dark-green);
+}

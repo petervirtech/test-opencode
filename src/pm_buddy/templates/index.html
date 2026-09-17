@@ -1,8 +1,11 @@
-<html>
-<head><title>PM Buddy</title></head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
 <h1>Epics</h1>
-<ul>{% for epic in epics %}<li><a href="{{ url_for('epic_detail', epic_id=epic.id) }}">{{ epic.id }}: {{ epic.title }}</a></li>{% endfor %}</ul>
-<a href="{{ url_for('add_epic') }}">Add Epic</a>
-</body>
-</html>
+<ul>
+    {% for epic in epics %}
+    <li><a href="{{ url_for('epic_detail', epic_id=epic.id) }}">{{ epic.id }}: {{ epic.title }}</a></li>
+    {% endfor %}
+</ul>
+<a class="btn" href="{{ url_for('add_epic') }}">Add Epic</a>
+{% endblock %}

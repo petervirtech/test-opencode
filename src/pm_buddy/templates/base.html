@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}PM Buddy{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='cbs.css') }}">
+</head>
+<body>
+    <header class="menu-bar">
+        <a class="logo" href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='cbs-logo.svg') }}" alt="CBS">
+        </a>
+        <nav class="menu-bar-links" aria-label="Main">
+            <a href="{{ url_for('index') }}"{{ (' class="active"' if active == 'epics' else '') | safe }}>Epics</a>
+            <a href="{{ url_for('sync') }}"{{ (' class="active"' if active == 'sync' else '') | safe }}>Sync</a>
+        </nav>
+    </header>
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="site-footer">
+        PM Buddy &mdash; your product management companion
+    </footer>
+</body>
+</html>

@@ -1,17 +1,25 @@
-<html>
-<head><title>Feature {{ feature.title if feature else 'Not Found' }}</title></head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}{{ feature.title if feature else 'Feature not found' }} &mdash; PM Buddy{% endblock %}
+
+{% block content %}
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="{{ url_for('index') }}">Epics</a>
+    {% if epic %} &rsaquo; <a href="{{ url_for('epic_detail', epic_id=epic.id) }}">{{ epic.title }}</a>{% endif %}
+    {% if feature %} &rsaquo; {{ feature.title }}{% endif %}
+</nav>
 {% if feature %}
-{% if epic %}<p><a href="{{ url_for('epic_detail', epic_id=epic.id) }}">{{ epic.title }}</a></p>{% endif %}
 <h1>{{ feature.title }}</h1>
-<p>Status: {{ feature.status.value }}</p>
+<p><span class="badge badge-{{ feature.status.value | lower | replace(' ', '-') }}">{{ feature.status.value }}</span></p>
 <p>{{ feature.description }}</p>
 <h2>Stories</h2>
-<ul>{% for story in stories %}<li>{{ story.id }}: {{ story.title }}</li>{% endfor %}</ul>
-<a href="{{ url_for('add_story', feature_id=feature.id) }}">Add Story</a>
+<ul>
+    {% for story in stories %}
+    <li>{{ story.id }}: {{ story.title }}</li>
+    {% endfor %}
+</ul>
+<a class="btn" href="{{ url_for('add_story', feature_id=feature.id) }}">Add Story</a>
 {% else %}
 <p>Feature not found.</p>
 {% endif %}
-<a href="/">Back to list</a>
-</body>
-</html>
+{% endblock %}
