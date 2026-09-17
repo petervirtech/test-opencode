@@ -12,7 +12,7 @@ class AzureAdapter:
         self.db = db
         # In a real implementation we would store credentials and endpoints.
 
-    def sync_to_azure(self):
+    def sync_to_azure(self) -> None:
         """
         Placeholder for hybrid sync logic.
         Would iterate over local entities, compare with Azure DevOps work items,
@@ -20,7 +20,7 @@ class AzureAdapter:
         """
         pass
 
-    def sync_from_azure(self):
+    def sync_from_azure(self) -> None:
         """
         Placeholder for pulling latest state from Azure DevOps.
         """

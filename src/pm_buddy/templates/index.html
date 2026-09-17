@@ -4,7 +4,7 @@
 <h1>Epics</h1>
 <ul>
     {% for epic in epics %}
-    <li><a href="{{ url_for('epic_detail', epic_id=epic.id) }}">{{ epic.id }}: {{ epic.title }}</a></li>
+    <li><a href="{{ url_for('epic_detail', epic_id=epic.id) }}">{{ epic.id }}: {{ epic.title }}</a> <span class="badge badge-{{ epic.status.value | lower | replace(' ', '-') }}">{{ epic.status.value }}</span></li>
     {% endfor %}
 </ul>
 <a class="btn" href="{{ url_for('add_epic') }}">Add Epic</a>

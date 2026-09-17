@@ -14,7 +14,7 @@
 <h2>Features</h2>
 <ul>
     {% for feature in features %}
-    <li><a href="{{ url_for('feature_detail', feature_id=feature.id) }}">{{ feature.id }}: {{ feature.title }}</a></li>
+    <li><a href="{{ url_for('feature_detail', feature_id=feature.id) }}">{{ feature.id }}: {{ feature.title }}</a> <span class="badge badge-{{ feature.status.value | lower | replace(' ', '-') }}">{{ feature.status.value }}</span></li>
     {% endfor %}
 </ul>
 <a class="btn" href="{{ url_for('add_feature', epic_id=epic.id) }}">Add Feature</a>

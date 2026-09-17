@@ -5,6 +5,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+from flask import Response
+
 import pm_buddy.webapp as w
 from pm_buddy.service import PMBuddyService
 from pm_buddy.test_support import TempDB
@@ -103,11 +105,12 @@ class TestPMBuddyWeb(unittest.TestCase):
         self.assertIn(b'<footer class="site-footer">', data)
         self.assertIn(b'your product management companion', data)
 
-    def assert_layout(self, response):
+    def assert_layout(self, response: Response):
         self.assertEqual(response.status_code, 200)
         data = response.data
         self.assertIn(b'<header class="menu-bar">', data)
         self.assertIn(b'/static/cbs-logo.svg', data)
+        self.assertIn(b'alt="CBS"', data)
         self.assertIn(b'<link rel="stylesheet" href="/static/cbs.css">', data)
         self.assertIn(b'<footer class="site-footer">', data)
 
@@ -147,7 +150,7 @@ class TestPMBuddyWeb(unittest.TestCase):
         response = self.client.get(f'/feature/{fid}')
         self.assertIn(b'<a class="btn" href="/add_story/' + str(fid).encode() + b'">Add Story</a>', response.data)
 
-    def assert_form_fields(self, response):
+    def assert_form_fields(self, response: Response):
         data = response.data
         self.assertIn(b'class="form-control"', data)
         self.assertIn(b'<button type="submit" class="btn">', data)
@@ -209,6 +212,18 @@ class TestPMBuddyWeb(unittest.TestCase):
         self._set_status('features', fid, 'Done')
         response = self.client.get(f'/feature/{fid}')
         self.assertIn(b'<span class="badge badge-done">Done</span>', response.data)
+
+    def test_index_shows_status_badge_for_epic(self):
+        w.service.add_epic("Epic Alpha")
+        response = self.client.get('/')
+        self.assertIn(b'<span class="badge badge-to-do">To Do</span>', response.data)
+
+    def test_epic_detail_shows_status_badge_for_feature(self):
+        eid = w.service.add_epic("Epic")
+        fid = w.service.add_feature(eid, "Feature Beta")
+        self._set_status('features', fid, 'In Progress')
+        response = self.client.get(f'/epic/{eid}')
+        self.assertIn(b'<span class="badge badge-in-progress">In Progress</span>', response.data)
 
 
 if __name__ == '__main__':
